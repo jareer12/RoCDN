@@ -11,6 +11,9 @@ import (
 )
 
 func main() {
+	// Avatar
+	av := database.New()
+
 	// Headshot store
 	hs := database.New()
 
@@ -22,22 +25,30 @@ func main() {
 
 	// Routes
 	e.GET("/", routes.PrimaryRoute)
+	e.GET("/avatar/:userId", routes.Avatar(&av))
 	e.GET("/headshot/:userId", routes.Headshot(&hs))
 
+	// Check & Remove Old Cached Images and Free Memory
 	go func() {
 		for true {
-			data := hs.Data
-
-			for i := 0; i < len(data); i++ {
-				r := data[i]
+			for i := 0; i < len(hs.Data); i++ {
+				r := hs.Data[i]
 
 				if time.Now().UnixMilli() >= r.Timestamp {
 					database.Remove(&hs, r.TargetId)
 				}
 			}
 
+			for i := 0; i < len(av.Data); i++ {
+				r := av.Data[i]
+
+				if time.Now().UnixMilli() >= r.Timestamp {
+					database.Remove(&av, r.TargetId)
+				}
+			}
+
+			fmt.Println(av, hs)
 			time.Sleep(time.Second * 5)
-			fmt.Println(fmt.Sprintf(`Goroutine Checked %v Cached Images`, len(data)))
 		}
 	}()
 
