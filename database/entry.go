@@ -24,6 +24,20 @@ func Get(s *structs.Storage, id int) *structs.Image {
 	return &structs.Image{}
 }
 
+func Remove(s *structs.Storage, id int) {
+	var f []structs.Image
+
+	for i := 0; i < len(s.Data); i++ {
+		r := s.Data[i]
+
+		if r.TargetId != id {
+			f = append(f, r)
+		}
+	}
+
+	s.Data = f
+}
+
 func Has(s *structs.Storage, id int) bool {
 	for i := 0; i < len(s.Data); i++ {
 		r := s.Data[i]

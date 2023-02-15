@@ -5,6 +5,7 @@ import (
 	"rblx/database"
 	"rblx/structs"
 	"strconv"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -43,7 +44,7 @@ func Headshot(db *structs.Storage) echo.HandlerFunc {
 		image := database.Get(db, int(user_id))
 
 		if image.TargetId > 0 {
-			return c.JSON(200, image)
+			return c.Redirect(302, image.ImageUrl)
 		} else {
 			r_image, err := rblx.GetHeadshot(int(user_id), int(size), "png", false)
 
@@ -54,14 +55,19 @@ func Headshot(db *structs.Storage) echo.HandlerFunc {
 				})
 			}
 
-			database.Insert(db, r_image)
+			database.Insert(db, structs.Image{
+				Size:      int(size),
+				TargetId:  r_image.TargetId,
+				ImageUrl:  r_image.ImageUrl,
+				Timestamp: time.Now().UnixMilli() + time.Hour.Milliseconds()*6,
+			})
 
 			if len(r_image.ImageUrl) > 0 {
-				return c.Redirect(301, r_image.ImageUrl)
+				return c.Redirect(302, r_image.ImageUrl)
 			} else {
 				return c.JSON(400, structs.Response{
 					Success: true,
-					Message: "Image Url invalid",
+					Message: "ImageURL Is Not Valid",
 				})
 			}
 		}
