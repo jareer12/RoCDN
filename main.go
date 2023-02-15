@@ -26,6 +26,7 @@ func main() {
 	e.GET("/", routes.PrimaryRoute)
 	e.GET("/avatar/:userId", routes.Avatar(&av))
 	e.GET("/headshot/:userId", routes.Headshot(&hs))
+	e.RouteNotFound("*", routes.NotFound)
 
 	// Check & Remove Old Cached Images and Free Memory
 	go func() {

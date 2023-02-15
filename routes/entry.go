@@ -21,6 +21,13 @@ func PrimaryRoute(c echo.Context) error {
 	})
 }
 
+func NotFound(c echo.Context) error {
+	return c.JSON(200, structs.Response{
+		Success: true,
+		Message: "Endpoint not found",
+	})
+}
+
 func Headshot(db *structs.Storage) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		user_id, err := strconv.ParseInt(c.Param("userId"), 0, 64)
