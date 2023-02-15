@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"rblx/database"
 	"rblx/routes"
 	"time"
@@ -52,5 +53,7 @@ func main() {
 	}()
 
 	// Start server
-	e.Logger.Fatal(e.Start("127.0.0.1:1313"))
+	e.StartServer(&http.Server{
+		Addr: ":1313",
+	})
 }
