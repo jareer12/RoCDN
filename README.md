@@ -4,5 +4,5 @@
 
 ## Usage
 
-- Headshot [http://{domain}/headshot/{userId}?size={size}](http://127.0.0.1:1313/headshot/1877006416?size=352)
-- Full Avatar [http://{domain}/avatar/{userId}?size={size}](http://127.0.0.1:1313/avatar/1877006416?size=352)
+- Headshot [http://{domain}/headshot/{userId}?size={size}](https://cdn.bloxboost.com/headshot/1877006416?size=352)
+- Full Avatar [http://{domain}/avatar/{userId}?size={size}](https://cdn.bloxboost.com/avatar/1877006416?size=352)
