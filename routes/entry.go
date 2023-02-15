@@ -17,15 +17,12 @@ var (
 func PrimaryRoute(c echo.Context) error {
 	return c.JSON(200, structs.Response{
 		Success: true,
-		Message: "Welcome - API Working",
+		Message: "Welcome - Roblox Cache Server By github.com/jareer12/RoCDN",
 	})
 }
 
 func NotFound(c echo.Context) error {
-	return c.JSON(200, structs.Response{
-		Success: true,
-		Message: "Endpoint not found",
-	})
+	return c.Redirect(302, `https://github.com/jareer12/RoCDN`)
 }
 
 func Headshot(db *structs.Storage) echo.HandlerFunc {
