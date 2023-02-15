@@ -14,11 +14,17 @@ var (
 	ValidSizes = []int16{30, 48, 60, 75, 100, 110, 140, 150, 352, 420, 720}
 )
 
-func PrimaryRoute(c echo.Context) error {
-	return c.JSON(200, structs.Response{
-		Success: true,
-		Message: "Welcome - Roblox Cache Server By github.com/jareer12/RoCDN",
-	})
+func PrimaryRoute(av *structs.Storage, hs *structs.Storage) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return c.JSON(200, structs.Response{
+			Success: true,
+			Message: "Welcome - Roblox Cache Server By github.com/jareer12/RoCDN",
+			Data: structs.DatabaseInfo{
+				Avatars:   len(av.Data),
+				Headshots: len(hs.Data),
+			},
+		})
+	}
 }
 
 func NotFound(c echo.Context) error {

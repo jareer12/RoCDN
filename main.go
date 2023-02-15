@@ -23,7 +23,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// Routes
-	e.GET("/", routes.PrimaryRoute)
+	e.GET("/", routes.PrimaryRoute(&av, &hs))
 	e.GET("/avatar/:userId", routes.Avatar(&av))
 	e.GET("/headshot/:userId", routes.Headshot(&hs))
 	e.RouteNotFound("*", routes.NotFound)

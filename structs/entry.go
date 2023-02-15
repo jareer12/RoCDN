@@ -1,15 +1,17 @@
 package structs
 
-type AnyMap []interface{}
-
 type Storage struct {
 	Data []Image
 }
 
+type RobloxResponse struct {
+	Data []RobloxImage
+}
+
 type Response struct {
-	Success bool   `json:"success"`
-	Message string `json:"message"`
-	Data    AnyMap `json:"data,omitempty"`
+	Success bool        `json:"success"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 type Image struct {
@@ -25,6 +27,7 @@ type RobloxImage struct {
 	ImageUrl string `json:"imageUrl"`
 }
 
-type RobloxResponse struct {
-	Data []RobloxImage
+type DatabaseInfo struct {
+	Avatars   int `json:"avatars"`
+	Headshots int `json:"headshots"`
 }
