@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"rblx/database"
 	"rblx/routes"
 	"time"
@@ -47,8 +46,7 @@ func main() {
 				}
 			}
 
-			fmt.Println(av, hs)
-			time.Sleep(time.Second * 5)
+			time.Sleep(time.Second * 5) // Re-check every 5 seconds
 		}
 	}()
 

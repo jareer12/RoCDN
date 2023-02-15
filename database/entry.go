@@ -12,11 +12,11 @@ func Insert(s *structs.Storage, i structs.Image) {
 	s.Data = append(s.Data, i)
 }
 
-func Get(s *structs.Storage, id int) *structs.Image {
+func Get(s *structs.Storage, id int, size int) *structs.Image {
 	for i := 0; i < len(s.Data); i++ {
 		r := s.Data[i]
 
-		if r.TargetId == id {
+		if r.TargetId == id && r.Size == size {
 			return &r
 		}
 	}

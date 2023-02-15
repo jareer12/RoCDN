@@ -41,7 +41,7 @@ func Headshot(db *structs.Storage) echo.HandlerFunc {
 			})
 		}
 
-		image := database.Get(db, int(user_id))
+		image := database.Get(db, int(user_id), int(size))
 
 		if image.TargetId > 0 {
 			return c.Redirect(302, image.ImageUrl)
@@ -94,7 +94,7 @@ func Avatar(db *structs.Storage) echo.HandlerFunc {
 			})
 		}
 
-		image := database.Get(db, int(user_id))
+		image := database.Get(db, int(user_id), int(size))
 
 		if image.TargetId > 0 {
 			return c.Redirect(302, image.ImageUrl)
